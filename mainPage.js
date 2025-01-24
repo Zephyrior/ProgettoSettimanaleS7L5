@@ -28,12 +28,12 @@ fetch(URL, {
       const element = productList[i];
 
       const col = document.createElement("div");
-      col.classList.add("col-4");
+      col.classList.add("col-4", "g-4");
 
       const card = document.createElement("div");
-      card.classList.add("card");
+      card.classList.add("card", "border", "border-success");
       col.appendChild(card);
-      card.innerHTML = `<img src="${element.imageUrl}" class="card-img-top mt-4" alt="${element.pName}">`;
+      card.innerHTML = `<img src="${element.imageUrl}" class="card-img-top mt-4" alt="${element.name}">`;
 
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
@@ -50,27 +50,27 @@ fetch(URL, {
       cardBody.appendChild(prodDesc);
 
       const btnContainer = document.createElement("div");
-      btnContainer.classList.add("d-flex", "justify-content-between");
+      btnContainer.classList.add("d-flex", "justify-content-between", "align-items-center");
       cardBody.appendChild(btnContainer);
 
+      const detAnchor = document.createElement("a");
+      detAnchor.classList.add("text-info", "fs-6");
+      detAnchor.innerText = "vedi dettagli";
+      btnContainer.appendChild(detAnchor);
+
       const modButton = document.createElement("button");
-      modButton.classList.add("btn", "btn-outline-info", "border", "border-0");
+      modButton.classList.add("btn", "btn-lg", "btn-outline-success", "border", "border-0");
       modButton.innerText = "Modifica";
       btnContainer.appendChild(modButton);
 
-      const delButton = document.createElement("button");
-      delButton.classList.add("btn", "btn-outline-danger", "border", "border-0");
-      delButton.innerText = "Cancella";
-      btnContainer.appendChild(delButton);
       row.appendChild(col);
 
       modButton.onclick = () => {
         window.location.assign(`./backOffice.html?_id=${element._id}`);
       };
+      detAnchor.onclick = () => {
+        window.location.assign(`./details.html?_id=${element._id}`);
+      };
     }
   })
   .catch((err) => console.log(err));
-
-const handleDel = () => {
-  const hasConfirmed = confirm("sei sicuro di voler eliminare il prodotto selezionato?");
-};
