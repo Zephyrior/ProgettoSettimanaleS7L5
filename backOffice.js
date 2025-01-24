@@ -29,7 +29,7 @@ eForm.onsubmit = function (event) {
   eForm.reset();
 
   fetch(URL, {
-    method: "PUT",
+    method: "POST",
     body: JSON.stringify(newProduct),
     headers: {
       Authorization:
