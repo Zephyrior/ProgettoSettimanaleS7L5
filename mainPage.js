@@ -24,15 +24,36 @@ fetch(URL, {
       const element = productList[i];
 
       const col = document.createElement("div");
-      col.innerHTML = `<div class="card" style="width: 18rem;">
-  <img src="${element.imageUrl}" class="card-img-top" alt="${element.pName}">
-  <div class="card-body">
-    <h5 class="card-title">${element.pName}e</h5>
-    <p class="card-text">${element.description}.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>`;
+      col.classList.add("col-4");
+
+      const card = document.createElement("div");
+      card.classList.add("card");
+      col.appendChild(card);
+      card.innerHTML = `<img src="${element.imageUrl}" class="card-img-top mt-4" alt="${element.pName}">`;
+
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body");
+      card.appendChild(cardBody);
+
+      const prodTitle = document.createElement("h5");
+      prodTitle.classList.add("cart-title");
+      prodTitle.innerHTML = `${element.name}`;
+      cardBody.appendChild(prodTitle);
+
+      const prodDesc = document.createElement("p");
+      prodDesc.classList.add("card-text");
+      prodDesc.innerHTML = `${element.description}`;
+      cardBody.appendChild(prodDesc);
+
+      const modButton = document.createElement("button");
+      modButton.classList.add("btn", "btn-outline-info", "border", "border-0");
+      modButton.innerText = "Modifica";
+      cardBody.appendChild(modButton);
       row.appendChild(col);
+
+      modButton.onclick = () => {
+        window.location.assign("./backOffice.html");
+      };
     }
   })
   .catch((err) => console.log(err));

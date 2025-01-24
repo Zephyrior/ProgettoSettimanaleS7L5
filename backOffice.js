@@ -3,12 +3,12 @@ const token =
 const URL = "https://striveschool-api.herokuapp.com/api/product/";
 
 class Products {
-  constructor(pName, description, brand, imageUrl, price) {
-    this.pName = pName;
-    this.description = description;
-    this.brand = brand;
-    this.imageUrl = imageUrl;
-    this.price = price;
+  constructor(_name, _description, _brand, _imageUrl, _price) {
+    this.name = _name;
+    this.description = _description;
+    this.brand = _brand;
+    this.imageUrl = _imageUrl;
+    this.price = _price;
   }
 }
 
@@ -19,13 +19,19 @@ const eForm = document.getElementById("backOfficeForm");
 eForm.onsubmit = function (event) {
   event.preventDefault();
 
-  const { pName, description, brand, imgUrl, price } = event.target.elements;
+  //const { pName, description, brand, imgUrl, price } = event.target.elements;
+  const newProduct = {
+    name: eForm.elements.name.value,
+    description: eForm.elements.description.value,
+    brand: eForm.elements.brand.value,
+    imageUrl: eForm.elements.imageUrl.value,
+    price: eForm.elements.price.value,
+  };
+  //const newProduct = new Products(pName.value, description.value, brand.value, imgUrl.value, price.value);
 
-  const newProduct = new Products(pName.value, description.value, brand.value, imgUrl.value, price.value);
-
-  eProduct.push(newProduct);
-  console.log(eProduct);
-  localStorage.setItem("eProduct", JSON.stringify(eProduct));
+  //eProduct.push(newProduct);
+  //console.log(eProduct);
+  //localStorage.setItem("eProduct", JSON.stringify(eProduct));
   eForm.reset();
 
   fetch(URL, {
