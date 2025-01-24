@@ -2,39 +2,21 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNjBmYmI3NDcwMTAwMTU4YjJiMmUiLCJpYXQiOjE3Mzc3MTE4NjcsImV4cCI6MTczODkyMTQ2N30.OwPnHMmsZmgoEr48ZzpNHEt6n2qkKnAU1MpqhlcpRNY";
 const URL = "https://striveschool-api.herokuapp.com/api/product/";
 
-fetch(URL, {
-  //method: "POST",
-  // body: JSON.stringify(eProduct),
-  headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNjBmYmI3NDcwMTAwMTU4YjJiMmUiLCJpYXQiOjE3Mzc3MTE4NjcsImV4cCI6MTczODkyMTQ2N30.OwPnHMmsZmgoEr48ZzpNHEt6n2qkKnAU1MpqhlcpRNY",
-    "Content-Type": "application/json",
-  },
-})
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error("Errore nella creazione nuovo prodotto");
-    }
-  })
-  .catch((err) => console.log(Error));
-
 class Products {
-  constructor(pName, description, brand, imgUrl, price) {
+  constructor(pName, description, brand, imageUrl, price) {
     this.pName = pName;
     this.description = description;
     this.brand = brand;
-    this.imgUrl = imgUrl;
+    this.imageUrl = imageUrl;
     this.price = price;
   }
 }
 
 let eProduct = [];
 
-const form = document.getElementById("backOfficeForm");
+const eForm = document.getElementById("backOfficeForm");
 
-form.onsubmit = function (event) {
+eForm.onsubmit = function (event) {
   event.preventDefault();
 
   const { pName, description, brand, imgUrl, price } = event.target.elements;
@@ -43,4 +25,24 @@ form.onsubmit = function (event) {
 
   eProduct.push(newProduct);
   console.log(eProduct);
+  localStorage.setItem("eProduct", JSON.stringify(eProduct));
+  eForm.reset();
+
+  fetch(URL, {
+    method: "PUT",
+    body: JSON.stringify(newProduct),
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNjBmYmI3NDcwMTAwMTU4YjJiMmUiLCJpYXQiOjE3Mzc3MTE4NjcsImV4cCI6MTczODkyMTQ2N30.OwPnHMmsZmgoEr48ZzpNHEt6n2qkKnAU1MpqhlcpRNY",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Errore nella creazione nuovo prodotto");
+      }
+    })
+    .catch((err) => console.log(err));
 };
