@@ -55,12 +55,12 @@ fetch(URL, {
 
       const detAnchor = document.createElement("a");
       detAnchor.classList.add("text-info", "fs-6");
-      detAnchor.innerText = "vedi dettagli";
+      detAnchor.innerText = "view details";
       btnContainer.appendChild(detAnchor);
 
       const modButton = document.createElement("button");
       modButton.classList.add("btn", "btn-lg", "btn-outline-success", "border", "border-0");
-      modButton.innerText = "Modifica";
+      modButton.innerText = "Edit Product";
       btnContainer.appendChild(modButton);
 
       row.appendChild(col);

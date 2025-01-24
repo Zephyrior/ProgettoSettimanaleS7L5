@@ -51,11 +51,12 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   if (productId) {
-    submitBtn.innerText = "Edit Product";
-    submitBtn.classList.remove("btn-primary");
-    submitBtn.classList.add("btn-success");
+    submitBtn.innerText = "Update Product";
+    submitBtn.classList.remove("btn-primary", "btn-lg");
+    submitBtn.classList.add("btn-success", "me-3");
     resButton.classList.add("d-none");
-    delButton.classList.remove("d-none");
+    delButton.classList.remove("d-none", "btn-lg");
+    delButton.classList.add("ms-3");
 
     fetch(URL, {
       headers: {

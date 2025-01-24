@@ -29,16 +29,18 @@ fetch(URL, {
 
     const productContainer = document.createElement("div");
     productContainer.classList.add("col-6");
-
+    //const header = document.createElement("h1");
+    //header.innerHTML = `${productList.name} details`;
+    //productContainer.appendChild(header);
     productContainer.innerHTML = `<div class="card">
   <img src="${productList.imageUrl}" class="card-img-top" alt="${productList.name}">
-  <div class="card-body">
+  <div class="card-body align-text-center">
     <h3 class="card-title">${productList.name}</h3>
     <p class="card-text">${productList.description}.</p>
     <p class="card-text fs-2">€ ${productList.price}</p>
   </div>
 </div>`;
-    console.log(row);
+
     row.appendChild(productContainer);
   })
 
