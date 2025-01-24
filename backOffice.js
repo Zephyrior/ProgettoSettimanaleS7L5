@@ -2,6 +2,10 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNjBmYmI3NDcwMTAwMTU4YjJiMmUiLCJpYXQiOjE3Mzc3MTE4NjcsImV4cCI6MTczODkyMTQ2N30.OwPnHMmsZmgoEr48ZzpNHEt6n2qkKnAU1MpqhlcpRNY";
 const URL = "https://striveschool-api.herokuapp.com/api/product/";
 
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("_id");
+console.log(productId);
+
 class Products {
   constructor(_name, _description, _brand, _imageUrl, _price) {
     this.name = _name;
@@ -52,3 +56,31 @@ eForm.onsubmit = function (event) {
     })
     .catch((err) => console.log(err));
 };
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (productId) {
+    fetch(URL + productId, {
+      method: "PUT",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNjBmYmI3NDcwMTAwMTU4YjJiMmUiLCJpYXQiOjE3Mzc3MTE4NjcsImV4cCI6MTczODkyMTQ2N30.OwPnHMmsZmgoEr48ZzpNHEt6n2qkKnAU1MpqhlcpRNY",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((productList) => {
+        console.log(productList);
+
+        eForm.elements.name.value = productList.name;
+        eForm.elements.description.value = productList.description;
+        eForm.elements.brand.value = productList.brand;
+        eForm.elements.imageUrl.value = productList.imageUrl;
+        eForm.elements.price.value = productList.price;
+      })
+      .catch((err) => console.log(err));
+  }
+});

@@ -2,6 +2,10 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNjBmYmI3NDcwMTAwMTU4YjJiMmUiLCJpYXQiOjE3Mzc3MTE4NjcsImV4cCI6MTczODkyMTQ2N30.OwPnHMmsZmgoEr48ZzpNHEt6n2qkKnAU1MpqhlcpRNY";
 const URL = "https://striveschool-api.herokuapp.com/api/product/";
 
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("_id");
+console.log(productId);
+
 fetch(URL, {
   method: "GET",
   headers: {
@@ -52,7 +56,7 @@ fetch(URL, {
       row.appendChild(col);
 
       modButton.onclick = () => {
-        window.location.assign("./backOffice.html");
+        window.location.assign(`./backOffice.html?_id=${element._id}`);
       };
     }
   })
