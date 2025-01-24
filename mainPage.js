@@ -49,10 +49,19 @@ fetch(URL, {
       prodDesc.innerHTML = `${element.description}`;
       cardBody.appendChild(prodDesc);
 
+      const btnContainer = document.createElement("div");
+      btnContainer.classList.add("d-flex", "justify-content-between");
+      cardBody.appendChild(btnContainer);
+
       const modButton = document.createElement("button");
       modButton.classList.add("btn", "btn-outline-info", "border", "border-0");
       modButton.innerText = "Modifica";
-      cardBody.appendChild(modButton);
+      btnContainer.appendChild(modButton);
+
+      const delButton = document.createElement("button");
+      delButton.classList.add("btn", "btn-outline-danger", "border", "border-0");
+      delButton.innerText = "Cancella";
+      btnContainer.appendChild(delButton);
       row.appendChild(col);
 
       modButton.onclick = () => {
@@ -61,3 +70,7 @@ fetch(URL, {
     }
   })
   .catch((err) => console.log(err));
+
+const handleDel = () => {
+  const hasConfirmed = confirm("sei sicuro di voler eliminare il prodotto selezionato?");
+};
